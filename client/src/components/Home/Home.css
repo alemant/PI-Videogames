@@ -1,0 +1,19 @@
+/* .body2 {
+    background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(108, 136, 147, 1) 35%, rgba(0, 212, 255, 1) 100%) !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} */
+
+.filters {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginated {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: fixed;
+}
