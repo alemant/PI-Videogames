@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getVideogameByNames } from '../../../actions/index.js';
+import './SearchBar.css';
 
 export default function SearchBar(){  
     const [name, setName] = useState('')
@@ -24,17 +25,17 @@ export default function SearchBar(){
     }
 
     return (
-        <div>
+        <div className="nav">
             <div>
                 <h1 className='h1'>Videogames App</h1>
-                <input
+                <input className="input"
                     type="text"
                     placeholder="Videogame search..."
                     value={name}
                     onChange={e => handleOnChange(e)}
                     onKeyPress={e => handleKeyPress(e)}
                 />
-                <button 
+                <button className="input"
                 type="submit"
                 onClick={e => handleSubmit(e)}
                 >Search</button>

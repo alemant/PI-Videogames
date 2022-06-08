@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getVideogameById } from '../../actions';
-
+import './Detail.css';
 
 
 export default function Detail(){
@@ -18,11 +18,13 @@ export default function Detail(){
     }, [dispatch, id]);
 
     return (
-        <div>
-            <h3>
-                <a href="http://localhost:3000/home">To home</a>
-            </h3>
-            <h1>{name}</h1>
+        <div className="body1">
+            <div className="separate">
+                <h3>
+                    <a className="tohome" href="http://localhost:3000/home">To home</a>
+                </h3>
+            </div>
+            <h1 className= "name">{name}</h1>
             <h4>Release Date: {released}</h4>
             <h4>Rating: {rating}</h4>
             <div>

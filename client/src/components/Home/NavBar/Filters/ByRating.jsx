@@ -14,7 +14,7 @@ export default function ByRating(){
     return(
         <div>
             <div className="label">By Rating</div>
-            <select onChange = {e => handleOnChange(e)}>
+            <select className="select" onChange = {e => handleOnChange(e)}>
                 <option value="All">All</option>
                 <option value="Asc">Ascending order</option>
                 <option value="Desc">Descending order</option>

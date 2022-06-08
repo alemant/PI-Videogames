@@ -36,7 +36,8 @@ const getApiInfo = async () => {
                 //released: p.released,
                 rating: p.rating,
                 platforms: p.parent_platforms.map((e) => e.platform.name),
-                genres: p.genres.map((e) => e.name)        
+                genres: p.genres.map((e) => e.name),
+                created: false      
             }
         })
         return ApiInfo;
@@ -54,7 +55,7 @@ const getDbInfo = async () => {
                 attributes: [],
                 },
             }],
-            attributes: ["id","name","image","rating"]
+            attributes: ["id","name","image","rating", "created"]
     });
     return infoDB;    
 }

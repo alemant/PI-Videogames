@@ -17,7 +17,7 @@ export default function ByGenre(){
     return (
         <div>
             <div className= "label">Genre</div>
-            <select onChange={e => handleOnChange(e)}>
+            <select className="select" onChange={e => handleOnChange(e)}>
                 <option value="All">All</option>
                 {genres && genres.map((e, i) => <option value={e.name} key={i}>{e.name}</option>)}
             </select>

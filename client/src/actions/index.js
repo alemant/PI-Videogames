@@ -19,10 +19,11 @@ export function getVideogameByNames(name){
         try {
             let json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
             return dispatch({
-                type: "GET_VIDEOGAME_BY_NAMES",
+                type: "GET_VIDEOGAME_BY_NAME",
                 payload: json.data
             })
         } catch (e) {
+            alert('Videogame not found')
             console.log(e)
         }
     }
@@ -82,5 +83,13 @@ export function orderByCreation(payload){
     return {
         type: "ORDER_BY_CREATION",
         payload
+    }
+}
+
+export function postVideogame(game){
+    return async function(dispatch){
+        const created= await axios.post(`http://localhost:3001/videogames`, game)
+        //console.log(game)
+        return created;
     }
 }

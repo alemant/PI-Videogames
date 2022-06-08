@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
 
+const img = "https://reygif.com/media/1/hombre-arana-14442.gif";
+
 export default function Card({image, name, genres, id, rating}){
     return(
         <div className="card">
@@ -35,7 +37,7 @@ export default function Card({image, name, genres, id, rating}){
                 <h6>Rating: {rating}</h6>
             </div>
             <div>
-                <img className="img" src={image} alt="No se encontró la imagen"  width="150px" height="150px"/>
+                <img className="img" src={image ? image : img } alt="No se encontró la imagen"  width="150px" height="150px"/>
             </div>
         </div>
     )

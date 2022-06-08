@@ -2,7 +2,9 @@ const initialState= {
     videogames: [],
     genres: [],
     details: {},
-    allVideogames: []
+    allVideogames: [],
+    createVideo: [],
+    filters: []
 }
 
 
@@ -14,7 +16,7 @@ export default function rootReducer(state= initialState, action){
                 videogames: action.payload,
                 allVideogames: action.payload
             };
-        case "GET_VIDEOGAME_BY_NAMES":
+        case "GET_VIDEOGAME_BY_NAME":
             return{
                 ...state,
                 videogames: action.payload,
@@ -44,7 +46,8 @@ export default function rootReducer(state= initialState, action){
             }}return array})()
             return{
                 ...state,
-                videogames: genresFiltered
+                videogames: genresFiltered,
+                filters: genresFiltered
             }
         case "ORDER_BY_NAME":
         let allVid = [...state.videogames]
@@ -59,7 +62,7 @@ export default function rootReducer(state= initialState, action){
         })
         return {
             ...state,
-            videogames: action.payload === 'All' ? state.videogames : allVid
+            videogames: action.payload === 'All' ? state.allVideogames : allVid
         }
         case "ORDER_BY_RATING":
             const all = [...state.videogames]
@@ -75,25 +78,27 @@ export default function rootReducer(state= initialState, action){
                 ...state,
                 videogames: action.payload === 'All' ? state.allVideogames : filterByRating
             }
-
-        // case "ORDER_BY_CREATION":
-        //     const videogamesCreated = action.payload === 'api'
-        //     ? state.allVideogames.filter(e => typeof e.id === 'number')
-        //     : state.allVideogames.filter(e => typeof e.id === 'string')
-        //     return{
-        //         ...state,
-        //         videogames: action.payload === 'All' ? state.allVideogames : videogamesCreated
-        //     }
-
         case "ORDER_BY_CREATION":
-            const a = [...state.allVideogames];
-            const videogamesCreated = action.payload === 'api'
-            ? a.filter(e => typeof(e.id) === 'number')
-            : a.filter(e => typeof(e.id) === 'string')
-            return{
-                ...state,
-                videogames: action.payload === 'all' ? state.allVideogames : videogamesCreated
-            }
+            let filter;
+            if(state.filters.length === 0){
+                let allVids = [...state.allVideogames];
+                filter = action.payload === 'api' ? allVids.filter(e => e.created === false) : allVids.filter(e => e.created === true)
+                return{
+                    ...state,
+                    videogames: action.payload === 'all' ? allVids : filter
+                }
+            }else if(state.filters.length > 0){
+                let allVids = [...state.filters];
+                filter = action.payload === 'api' ? allVids.filter(e => e.created === false) : allVids.filter(e => e.created === true)
+                return{
+                    ...state,
+                    videogames: action.payload === 'all' ? allVids : filter
+                }
+            }return
+        case "POST_VIDEOGAME":
+            return {
+                ...state
+            };
         default:
             return state;
     }

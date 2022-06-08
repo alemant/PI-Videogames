@@ -14,7 +14,7 @@ import Paginated from './Paginated/Paginated';
 export default function Home(){
     const allVideogames = useSelector(state => state.videogames);
 
-    console.log(allVideogames);
+    //console.log(allVideogames);
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +23,10 @@ export default function Home(){
     const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
     const currentVideogames = allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame);
 
+    //! if(currentPage > Math.ceil(allVideogames.length/15) && currentPage !== 1){
+    //!     setCurrentPage(1)
+    //! };
+    
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -38,18 +42,18 @@ export default function Home(){
     };
 
     return(
-        <div className="body2">
-            <div>
+        <div className="body">
+            <div className="search">
                 <SearchBar />
             </div>
             <button className="created">
                 <Link className="link" to="/videogame">Videogame Factory</Link>
             </button>
             <div>
-                <button onClick={e => handleClick(e)}>Reload Videogames</button>
+                <button className="reload" onClick={e => handleClick(e)}>Reload Videogames</button>
             </div>
             <div className="filters">
-                <ByGenre/>
+                <ByGenre paginado={paginado}/>
                 <ByCreation/>
                 <AlphabeticalOrder/>
                 <ByRating/>

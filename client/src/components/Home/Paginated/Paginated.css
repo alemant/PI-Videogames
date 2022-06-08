@@ -1,0 +1,28 @@
+.page{
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(67, 128, 192);
+    text-align: center;
+}
+
+.pagin{
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    background-color: blue;
+    border-color: rgb(217, 215, 193);
+    border-radius: 5px;
+    color: rgb(245, 235, 235)
+}
+
+.pagin:hover{
+    background-color: rgb(245, 235, 235);
+    color: rgb(67, 128, 192);
+    cursor: pointer;
+}
+
+.pagin:focus{
+    background-color: rgb(245, 235, 235);
+    color: rgb(67, 128, 192);
+}

@@ -12,9 +12,9 @@ export default function AlphabeticalOrder(){
     };
 
     return(
-        <div>
+        <div className="alpha">
             <div className="label">Alphabetical Order</div>
-            <select onChange={e => handleOnChange(e)}>
+            <select className="select" onChange={e => handleOnChange(e)}>
                 <option value="All">All</option>
                 <option value="Asc">Asc</option>
                 <option value="Desc">Desc</option>

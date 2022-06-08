@@ -14,7 +14,7 @@ export default function ByCreation(){
     return(
         <div>
             <div className="label">By Creation</div>
-            <select onChange={e => handleOnChange(e)}>
+            <select className="select" onChange={e => handleOnChange(e)}>
                 <option value="all">All</option>
                 <option value="api">API</option>
                 <option value="bd">BD</option>

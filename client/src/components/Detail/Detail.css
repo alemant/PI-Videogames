@@ -1,0 +1,33 @@
+.body1{
+    background-image: url(../../images/detail.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin-top: -20px;
+}
+
+.separate{
+    margin: 20px;
+    position: fixed
+}
+
+.tohome{
+    color: rgb(67, 128, 192);
+    text-decoration: none;
+    border: 1px solid rgb(67, 128, 192);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 1rem;
+    padding: 10px;
+}
+
+.name{
+    color: rgb(67, 128, 192);
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid rgb(159, 141, 141);
+}
