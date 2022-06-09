@@ -35,7 +35,7 @@ const getApiInfo = async () => {
                 //description: p.description,
                 //released: p.released,
                 rating: p.rating,
-                platforms: p.parent_platforms.map((e) => e.platform.name),
+                platforms: p.platforms.map((e) => e.platform.name),
                 genres: p.genres.map((e) => e.name),
                 created: false      
             }
@@ -140,8 +140,8 @@ const getByNameTotal = async (name) => {
         const dbName = await getGameByNameBd(name);
         const totalNames = apiName.concat(dbName);
         return totalNames;
-    }catch(e){
-        console.log(e)
+    }catch(error){
+        console.log(error)
     }
 }
 
@@ -204,5 +204,16 @@ router.post('/', async (req, res, next)=>{
         next(error)
     }
 });
+
+router.delete('/:id', async (req, res, next)=>{
+    try{
+    const id = req.params.id;
+    Videogame.destroy({where: {id}})
+    res.send("The game has been destroyed")
+    }
+    catch(error){
+        next(error)
+    }
+})
 
 module.exports = router

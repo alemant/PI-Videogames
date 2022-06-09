@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getVideogameById } from '../../actions';
 import './Detail.css';
 
-
+const img = "https://c.tenor.com/uGk2oPRstsEAAAAC/spiderman-fight.gif";
 export default function Detail(){
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -49,7 +49,7 @@ export default function Detail(){
                 })}
             </div>
             <div>
-                <img className='image' src={image} alt="Img not available" width="300px" height="300px"/>
+                <img className='image' src={image?image:img} alt="Img not found"  width="300px" height="300px"/>
             </div>
             <h4>Description: {description}</h4>
             <div> <h2>Platforms</h2>

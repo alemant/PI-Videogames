@@ -14,7 +14,7 @@ export function getVideogames(){
     }
 };
 
-export function getVideogameByNames(name){
+export function getVideogameByName(name){
     return async function(dispatch){
         try {
             let json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
@@ -91,5 +91,12 @@ export function postVideogame(game){
         const created= await axios.post(`http://localhost:3001/videogames`, game)
         //console.log(game)
         return created;
+    }
+}
+
+export function borrarGame(id) {
+    return async function(dispatch){
+        await axios.delete(`http://localhost:3001/videogames/${id}`)
+        dispatch({type: "DELETE_GAME", payload: id})
     }
 }

@@ -2,49 +2,51 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { getGenres, getVideogames, postVideogame } from "../../actions";
 import { Link, useHistory } from "react-router-dom";
+import './Form.css';
+import logo from '../../images/logo.png';
 
 function validate(input){
     let noEmpty = /\S+/;
     let validateName = /^.{5,15}$/;
     let errors = {};
     if(!input.name){
-        errors.name = 'The name is required';
+        errors.name = 'Please, name is required';
     }
     else if(!noEmpty.test(input.name)){
-        errors.name = 'The name cannot start with a blank space';
+        errors.name = 'Please, the name cannot start with a blank space';
     }
     else if(!validateName.test(input.name)){
-        errors.name = 'The name must be between 5 and 15 characters long';
+        errors.name = 'Please, the name must be between 5 and 15 characters long';
     }
     else if(!input.description){
-        errors.description = 'Description is required';
+        errors.description = 'Please, description is required';
     }
     else if(!noEmpty){
-        errors.description = "Description cannot start with a blank space"
+        errors.description = "Please, description cannot start with a blank space"
     }
     else if(!(/^.{5,300}$/).test(input.description)){
-        errors.description = 'This field must be between 5 and 300 characters long'
+        errors.description = 'Please, this field must be between 5 and 300 characters long'
     }
     else if(!input.released || input.released > new Date()){
-        errors.released = 'Date is required and must be in the past';
+        errors.released = 'Please, date is required and must be in the past';
     }
     else if(!input.rating){
-        errors.rating = 'Rating is required';
+        errors.rating = 'Please, rating is required';
     }
     else if(input.rating <= 0 || input.rating > 5){
-        errors.rating = 'Rating must be between 0 and 5';
+        errors.rating = 'Please, rating must be between 0 and 5';
     }
     else if(!(/^\d*(\.\d{1})?\d{0,1}$/).test(input.rating)){
-        errors.rating = 'Rating must have only 2 decimal places'
+        errors.rating = 'Please, rating must have only 2 decimal places'
     }
-    if(input.genres.length === 0){
-        errors.genres = 'At least one genre is required'
+    else if(input.genres.length === 0){
+        errors.genres = 'Please, at least one genre is required'
     }
     else if(input.genres.length > 3){
         errors.genres = 'You can only choose 3 genres per game';
     }
     else if(input.platforms.length === 0){
-        errors.platforms = 'At least one platform is required'
+        errors.platforms = 'Please, at least one platform is required'
     }
     else if(input.platforms.length > 3){
         errors.platforms = 'You can only choose 3 platforms per game'
@@ -56,9 +58,12 @@ function validate(input){
 export default function Form(){
     const dispatch = useDispatch();
     const allGenres = useSelector(state => state.genres);
-    let allVideogames = useSelector(state => state.videogames);
-    allVideogames = (allVideogames.map((e, i) => e.platforms)).join(',').split(',');
-    allVideogames = [...new Set(allVideogames)].map((e,i) => ({'name':e, 'id':i}))
+    let allVideogames = useSelector(state => state.allVideogames);
+    let plataforma = (allVideogames.map((e) => e.platforms))
+    let allPlatf = [...new Set(plataforma.flat())].sort();
+    if(allPlatf.length > 19){
+        allPlatf.pop()
+    }
     
     const [errors, setErrors] = useState({});
     const history = useHistory();
@@ -153,138 +158,148 @@ export default function Form(){
     }
 
     return (
-        <div>
+        <div className="form">
             <div>
                 <Link to='/home'>
-                    <button>To Home</button>
+                    <button className="tohome">To Home</button>
                 </Link>
             </div>
-            <h1>Videogame Factory</h1>
-            <hr />
+            <h1 className="fact">Videogame Factory</h1>
             <br />
             <form onSubmit={e => handleSubmit(e)}>
-                <div>
-                    <label>Videogame name: </label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={input.name}
-                        onChange={e => handleChange(e)}
-                        //required
-                    />
-                    {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
-                </div>
-                <br />
-                <div>
-                    <label>Description: </label>
-                    <input
-                        className="error"
-                        type="text"
-                        name="description"
-                        value={input.description}
-                        onChange={e => handleChange(e)}
-                    />
-                    {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
-                </div>
-                <br />
-                <div>
-                    <label>Image</label>
-                    <input
-                        type='text'
-                        name='image'
-                        value={input.image}
-                        onChange={e => handleChange(e)}
-                        >
-                    </input>
-                </div>
-                <div>
-                    <label>Released: </label>
-                    <input
-                        type="date"
-                        name="released"
-                        value={input.released}
-                        onChange={e => handleChange(e)}
-                        max={new Date().toISOString().split('T')[0]}
-                    />
-                    {errors.released && <p style={{ color: "red" }}>{errors.released}</p>}
-                </div>
-                <br />
-                <div>
-                    <label>Rating: </label>
-                    <input
-                        type="number"
-                        step={0.01}
-                        name="rating"
-                        value={input.rating}
-                        onChange={e => handleChange(e)}
-                    />
-                    {errors.rating && <p style={{ color: "red" }}>{errors.rating}</p>}
-                </div>
-                <br />
-                <div>
+                <div className="one">
                     <div>
-                        <label>Genres: </label>
-                    </div>
-                    <br />
-                    <div>
-                        {allGenres.map((genres, i) => {
-                            return (
-                                <div key= {i}>
-                                    <input
-                                        id={i}
-                                        name={genres.name}
-                                        type="checkbox" 
-                                        value={genres.name}
-                                        onChange={(e) => handleGenresSelect(e)}
-                                    />
-                                    <label>{genres.name}</label>
-                                </div>
-                            )
-                        })}
-                        {errors.genres && <p style={{ color: "red" }}>{errors.genres}</p>}
-                    </div>
-                </div>
-                <br />
-                <div>
-                    <div>
-                        <label>Platforms: </label>
-                    </div>
-                    <br />
-                    <div>
-                        {allVideogames.map(platf =>{
-                            return (
-                                <div key={platf.id}>
-                                    <input
-                                        key={platf.id}
-                                        name={platf.name}
-                                        type="checkbox"
-                                        value={platf.name}
-                                        // onChange={e => handleSelectPlatforms(e)}
-                                        //disabled={input.platforms.length >= 3}
-                                        onChange={(e) => handlePlatformsSelect(e)}
-                                    />
-                                    <label>{platf.name}</label>
-                                </div>
-                            )
-                        })}
-                        {errors.platforms && <p style={{ color: "red" }}>{errors.platforms}</p>}
-                    </div>
-                </div>
-                <hr />
-                <div>
-                    <input
-                        type="submit"
-                        value={input.created}
-                        disabled={Object.keys(errors).length > 0 ||
-                            input.name === "" ||
-                            input.description === "" ||
-                            input.released === "" ||
-                            input.rating === "" ||
-                            input.genres.length === 0 ||
-                            input.platforms.length === 0}
+                        <label className="title">Name: </label>
+                        <input
+                            className="inputext"
+                            type="text"
+                            name="name"
+                            value={input.name}
+                            onChange={e => handleChange(e)}
+                            //required
                         />
+                        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
+                    </div>
+                    <br />
+                    <div>
+                        <label className="title">Description: </label>
+                        <input
+                            className="inputext"
+                            type="text"
+                            name="description"
+                            value={input.description}
+                            onChange={e => handleChange(e)}
+                        />
+                        {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
+                    </div>
+                    <br />
+                    <div>
+                        <label className="title">Image: </label>
+                        <input
+                            className="inputext"
+                            type='text'
+                            name='image'
+                            value={input.image}
+                            onChange={e => handleChange(e)}
+                            >
+                        </input>
+                    </div>
+                    <div>
+                        <label className="title">Released: </label>
+                        <input
+                            className="inputext"
+                            type="date"
+                            name="released"
+                            value={input.released}
+                            onChange={e => handleChange(e)}
+                            max={new Date().toISOString().split('T')[0]}
+                        />
+                        {errors.released && <p style={{ color: "red" }}>{errors.released}</p>}
+                    </div>
+                    <br />
+                    <div>
+                        <label className="title">Rating: </label>
+                        <input
+                            className="inputext"
+                            type="number"
+                            step={0.01}
+                            name="rating"
+                            value={input.rating}
+                            onChange={e => handleChange(e)}
+                        />
+                        {errors.rating && <p style={{ color: "red" }}>{errors.rating}</p>}
+                    </div>
+                </div>
+                <br />
+                <div className="genplat">
+                    <div className="genre">
+                        <div>
+                            <label className="title">Genres: </label>
+                        </div>
+                        <br />
+                        <div>
+                            {allGenres.map((genres, i) => {
+                                return (
+                                    <div key= {i}>
+                                        <input
+                                            className="check"
+                                            id={i}
+                                            name={genres.name}
+                                            type="checkbox" 
+                                            value={genres.name}
+                                            onChange={(e) => handleGenresSelect(e)}
+                                        />
+                                        <label>{genres.name}</label>
+                                    </div>
+                                )
+                            })}
+                            {errors.genres && <p style={{ color: "red" }}>{errors.genres}</p>}
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            className="submit"
+                            type="submit"
+                            value={input.created}
+                            disabled={Object.keys(errors).length > 0 ||
+                                input.name === "" ||
+                                input.description === "" ||
+                                input.released === "" ||
+                                input.rating === "" ||
+                                input.genres.length === 0 ||
+                                input.platforms.length === 0}
+                            />
+                    </div>
+                    <div className="platform">
+                        <div>
+                            <label className="title">Platforms: </label>
+                        </div>
+                        <br />
+                        <div>
+                            {allPlatf.map(platf =>{
+                                return (
+                                    <div key={platf}>
+                                        <input
+                                            className="check"
+                                            key={platf}
+                                            name={platf}
+                                            type="checkbox"
+                                            value={platf}
+                                            //disabled={input.platforms.length >= 3}
+                                            onChange={(e) => handlePlatformsSelect(e)}
+                                        />
+                                        <label>{platf}</label>
+                                    </div>
+                                )
+                            })}
+                            {errors.platforms && <p style={{ color: "red" }}>{errors.platforms}</p>}
+                        </div>
+                    </div>
                 </div>
             </form>
+            <div>
+                <img src={logo} alt="img not found" width="70px" height="70px"/>
+            </div>
         </div>
     )
 }

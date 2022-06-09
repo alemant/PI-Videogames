@@ -1,21 +1,24 @@
 .body1{
+    width: 100%;
+    height: 100%;
     background-image: url(../../images/detail.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    margin-top: -20px;
+    margin-top: -17px;
 }
 
 .separate{
+    display: flex;
     margin: 20px;
     position: fixed
 }
 
 .tohome{
-    color: rgb(67, 128, 192);
+    color: #2B3784;
     text-decoration: none;
-    border: 1px solid rgb(67, 128, 192);
+    border: 1px solid #2B3784;
     border-radius: 5px;
     padding: 5px;
     margin-top: 1rem;
@@ -23,7 +26,7 @@
 }
 
 .name{
-    color: rgb(67, 128, 192);
+    color: #2B3784;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;

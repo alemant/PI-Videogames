@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
+import { useDispatch } from 'react-redux';
+import { borrarGame } from '../../../../actions';
 
-const img = "https://reygif.com/media/1/hombre-arana-14442.gif";
+const img = "https://c.tenor.com/uGk2oPRstsEAAAAC/spiderman-fight.gif";
 
 export default function Card({image, name, genres, id, rating}){
+    const dispatch = useDispatch();
+    function handleClick(e, id) {
+        e.preventDefault();
+        dispatch(borrarGame(id))
+    }
+
     return(
         <div className="card">
             <nav className='card-body'>
@@ -38,6 +46,9 @@ export default function Card({image, name, genres, id, rating}){
             </div>
             <div>
                 <img className="img" src={image ? image : img } alt="No se encontró la imagen"  width="150px" height="150px"/>
+            </div>
+            <div>
+                {id.length > 10 ? <button onClick={e => handleClick(e, id)}>Delete game</button>: null}
             </div>
         </div>
     )

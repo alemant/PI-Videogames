@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getVideogameByNames } from '../../../actions/index.js';
+import { getVideogameByName } from '../../../actions/index.js';
 import './SearchBar.css';
 
 export default function SearchBar(){  
@@ -14,7 +14,7 @@ export default function SearchBar(){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(getVideogameByNames(name))
+        dispatch(getVideogameByName(name))
         setName('')
     };
 
