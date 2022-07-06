@@ -2,15 +2,17 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
+    text-shadow: 0 0 0.2em rgb(152, 7, 7), 0 0 0.2em rgb(5, 56, 105);
     background-color: transparent;
-    border: 2px solid blue;
+    border: 2px solid #2B3784;
     padding: 0.3rem;
     border-radius: 0.5rem;
     margin-right: 0.5rem;
 }
 
 .select{
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: #2b3784;
     border: 2px solid #2B3784;
     border-radius: 0.5rem;
     color: white;

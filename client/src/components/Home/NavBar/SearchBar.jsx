@@ -35,7 +35,7 @@ export default function SearchBar(){
                     onChange={e => handleOnChange(e)}
                     onKeyPress={e => handleKeyPress(e)}
                 />
-                <button className="input"
+                <button className="inputt"
                 type="submit"
                 onClick={e => handleSubmit(e)}
                 >Search</button>

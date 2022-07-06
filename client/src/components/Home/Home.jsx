@@ -22,10 +22,6 @@ export default function Home(){
     const indexOfLastVideogame = currentPage * videogamesPerPage;
     const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
     const currentVideogames = allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame);
-
-    if(currentPage > Math.ceil(allVideogames.length/15) && currentPage !== 1){
-        setCurrentPage(1)
-    };
     
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);

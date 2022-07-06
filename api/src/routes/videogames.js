@@ -17,7 +17,7 @@ const getApiInfo = async () => {
         let Page4 = axios.get(`${url}&page=4`);
         let Page5 = axios.get(`${url}&page=5`);
 
-        let allPages = await Promise.all([Page1, Page2, Page3, Page4, Page5]);  
+        let allPages = await Promise.all([Page1, Page2, Page3, Page4, Page5]); 
 
         Page1 = allPages[0].data.results;
         Page2 = allPages[1].data.results;
@@ -26,7 +26,7 @@ const getApiInfo = async () => {
         Page5 = allPages[4].data.results;       
 
         let apiHtml = Page1.concat(Page2).concat(Page3).concat(Page4).concat(Page5);                  
-            
+        
         let ApiInfo = apiHtml.map(p => {
             return {
                 id: p.id,
@@ -41,10 +41,20 @@ const getApiInfo = async () => {
             }
         })
         return ApiInfo;
+        
     }catch (error){
         console.log(error);
     }
 };
+
+getApiInfo().then(data => {
+    console.log(data);
+}
+).catch(error => {
+    console.log(error);
+}
+);
+console.log(getApiInfo())
 
 const getDbInfo = async () => {    
     const infoDB = await Videogame.findAll({
@@ -70,7 +80,6 @@ const getAllGames = async () => {
         console.log(error);
     }
 };
-
 
 const getGameByIdApi = async (id) => {
     const apiUrl = await axios.get(`https://api.rawg.io/api/games/${id}?key=${key}`);
@@ -204,16 +213,5 @@ router.post('/', async (req, res, next)=>{
         next(error)
     }
 });
-
-router.delete('/:id', async (req, res, next)=>{
-    try{
-    const id = req.params.id;
-    Videogame.destroy({where: {id}})
-    res.send("The game has been destroyed")
-    }
-    catch(error){
-        next(error)
-    }
-})
 
 module.exports = router

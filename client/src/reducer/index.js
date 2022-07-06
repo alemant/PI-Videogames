@@ -99,12 +99,6 @@ export default function rootReducer(state= initialState, action){
             return {
                 ...state
             }
-        case "DELETE_GAME":
-            return {
-                ...state,
-                videogames: state.videogames.filter(e => e.id !== action.payload),
-                allVideogames: state.allVideogames.filter(e => e.id !== action.payload)
-            }
         default:
             return state;
     }

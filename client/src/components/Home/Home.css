@@ -8,7 +8,9 @@
 
 .created{
     color: rgb(67, 128, 192);
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: #2b3784;
+    border-color: #2B3784;
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
@@ -16,20 +18,26 @@
     margin-bottom: 1px;
     border-top: 1px solid rgb(159, 141, 141);
     border-bottom: 2px solid white;
+    border-radius: 10px;
 }
 
 .reload{
-    color: black;
-    background-color: transparent;
+    color: white;
+    text-shadow: 0 0 0.2em rgb(24, 25, 26), 0 0 0.2em rgb(255, 255, 255);
+    /* background-color: transparent; */
+    background-color: #2b3784;
     font-size: 0.8rem;
     font-weight: bold;
     text-align: center;
     border-top: 1px solid rgb(159, 141, 141);
     border-bottom: 2px solid white;
+    border-radius: 10px;
+    border-color: #2B3784;
 }
 
 .link{
-    color: black;
+    color: white;
+    text-shadow: 0 0 0.2em rgb(24, 25, 26), 0 0 0.2em rgb(255, 255, 255);
     text-decoration: none;
 }
 

@@ -19,7 +19,7 @@ export default function Cards({allVideogames}){
                 />
             )):
             <div className="container">
-                <img src={image} alt="Img"/>
+                <img src={image} alt="Img" width="497px" height="497px"/>
             </div>
             }
         </div>

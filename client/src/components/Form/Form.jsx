@@ -6,9 +6,11 @@ import './Form.css';
 import logo from '../../images/logo.png';
 
 function validate(input){
+    let expresion = /\.(gif|jpg|jpeg|png)$/;
     let noEmpty = /\S+/;
     let validateName = /^.{5,15}$/;
     let errors = {};
+    
     if(!input.name){
         errors.name = 'Please, name is required';
     }
@@ -50,6 +52,9 @@ function validate(input){
     }
     else if(input.platforms.length > 3){
         errors.platforms = 'You can only choose 3 platforms per game'
+    }
+    else if(! expresion.test(input.image)){
+        input.image && (errors.image = 'Please, this field must be a valid URL');
     }
     return errors;
 }
@@ -201,8 +206,8 @@ export default function Form(){
                             name='image'
                             value={input.image}
                             onChange={e => handleChange(e)}
-                            >
-                        </input>
+                        />
+                        {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
                     </div>
                     <div>
                         <label className="title">Released: </label>
@@ -298,7 +303,7 @@ export default function Form(){
                 </div>
             </form>
             <div>
-                <img src={logo} alt="img not found" width="70px" height="70px"/>
+                <img className="logo" src={logo} alt="img not found" width="70px" height="70px"/>
             </div>
         </div>
     )

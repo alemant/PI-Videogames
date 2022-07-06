@@ -34,3 +34,20 @@
     margin-bottom: 1rem;
     border-top: 1px solid rgb(159, 141, 141);
 }
+
+.loa{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}
+
+.image{
+    /*colocar la imagen fixed al centro y a la izquierda*/
+    /* position: fixed; */
+    position: left;
+    left: 0;
+    bottom: 0;
+    width: 30%;
+    height: 30%;
+    background-size: cover;
+}

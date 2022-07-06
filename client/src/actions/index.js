@@ -93,10 +93,3 @@ export function postVideogame(game){
         return created;
     }
 }
-
-export function borrarGame(id) {
-    return async function(dispatch){
-        await axios.delete(`http://localhost:3001/videogames/${id}`)
-        dispatch({type: "DELETE_GAME", payload: id})
-    }
-}
