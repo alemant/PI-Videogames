@@ -1,11 +1,11 @@
 require('dotenv').config();
-const { key } = process.env;
+//const { key } = process.env;
 const { Router } = require('express');
 const router = Router();
 const { Videogame, Genre } = require('../db');
 const axios = require('axios');
 const { Op } = require("sequelize");
-
+const key = 'e8b2123d310a4009bd9d5d0fd887ab4c'
 const url = `https://api.rawg.io/api/games?key=${key}`;
 //console.log(url)
 
