@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { getVideogameById } from '../../actions';
 import './Detail.css';
 
+
 //-----------------------------------------------------------
-import load from '../../images/load.gif';
+import Charging from '../Charging';
 //-----------------------------------------------------------
 
 const img = "https://c.tenor.com/uGk2oPRstsEAAAAC/spiderman-fight.gif";
@@ -26,59 +27,74 @@ export default function Detail(){
                     <a className="tohome" href="/home">To home</a>
                 </h3>
             </div>
-            {details.name ? (<div>
-                <h1 className= "name">{name}</h1>
-                <h4>Release Date: {released}</h4>
-                <h4>Rating: {rating}</h4>
+            {details.name ? (
                 <div>
-                    {genres?.map(t => {
-                        if(typeof(t) === 'string'){
-                            return (
-                            <div key={t}>
-                                <span className="type">
-                                    {t.replace(t[0], t[0].toUpperCase())}
-                                </span>
+                    <div className='head'>
+                        <div className='box1'>
+                            <h1 className='name'>{name}</h1>
+                        </div>
+                        <h3 className='release'>Release Date: {released}</h3>
+                        <h3 className='rating'>Rating: {rating}</h3>
+                    </div>
+                    <div className='box2'>
+                        <div className='image'>
+                            <img className='imgn' src={image ? image : img} alt="Imagen de videogame" />
+                        </div>
+                        <div className='class'>
+                            <h3 className='type'>Genres:</h3>
+                            <div>
+                                {genres?.map(t => {
+                                    if(typeof(t) === 'string'){
+                                        return (
+                                        <div key={t}>
+                                            <span className="type">
+                                                {t.replace(t[0], t[0].toUpperCase())}
+                                            </span>
+                                        </div>
+                                    )}
+                                    else{
+                                        return (
+                                            <div key={t.name}>
+                                                <span>
+                                                    {t.name}
+                                                </span>
+                                            </div>
+                                        )
+                                    }
+                                })}
                             </div>
-                        )}
-                        else{
-                            return (
-                                <div key={t.name}>
-                                    <span>
-                                        {t.name}
-                                    </span>
-                                </div>
-                            )
-                        }
-                    })}
+                            <div>
+                                <h3 className='type'>Platforms</h3>
+                                {platforms?.map(t => {
+                                    if (typeof (t) === 'string') {
+                                        return (
+                                            <div key={t}>
+                                                <span className="type">
+                                                    {t.replace(t[0], t[0].toUpperCase())}
+                                                </span>
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div key={t.name}>
+                                                <span>
+                                                    {t.name}
+                                                </span>
+                                            </div>
+                                        )
+                                    }
+                                })}
+                            </div>
+                        </div>
+                        <div className='class'>
+                            <h3>Description: </h3>
+                            <span>{description}</span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <img className='image' src={image?image:img} alt="Img not found"  width="300px" height="300px"/>
-                </div>
-                <h4>Description: {description}</h4>
-                <div> <h2>Platforms</h2>
-                    {platforms?.map(t => {
-                            if(typeof(t) === 'string'){
-                                return (
-                                <div key={t}>
-                                    <span className="type">
-                                        {t.replace(t[0], t[0].toUpperCase())}
-                                    </span>
-                                </div>
-                            )}
-                            else{
-                                return (
-                                    <div key={t.name}>
-                                        <span>
-                                            {t.name}
-                                        </span>
-                                    </div>
-                                )
-                            }
-                        })}
-                </div>
-            </div>) : 
-            <div className="loa">
-                <img src={load} alt="img not found" width="750px" height="750px"/>
+            ) :
+            <div>
+                    <Charging/>
             </div>}
         </div>
     )

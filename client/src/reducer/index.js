@@ -99,6 +99,12 @@ export default function rootReducer(state= initialState, action){
             return {
                 ...state
             }
+        case "RESET_VIDEOGAMES":
+            return{
+                ...state,
+                videogames: action.payload,
+                allVideogames: action.payload
+            }
         default:
             return state;
     }

@@ -7,7 +7,7 @@ import ByGenre from './NavBar/Filters/ByGenre';
 import ByRating from './NavBar/Filters/ByRating';
 import SearchBar from './NavBar/SearchBar';
 import AlphabeticalOrder from './NavBar/Filters/AlphabeticalOrder';
-import { getGenres, getVideogames } from '../../actions';
+import { getGenres, getVideogames, reset_videogames } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Paginated from './Paginated/Paginated';
 
@@ -30,6 +30,7 @@ export default function Home(){
     useEffect(() => {
         dispatch(getVideogames())
         dispatch(getGenres())
+        return dispatch(reset_videogames())
     },[dispatch])
 
     function handleClick(e){

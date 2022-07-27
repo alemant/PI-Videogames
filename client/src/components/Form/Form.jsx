@@ -64,8 +64,8 @@ export default function Form(){
     const dispatch = useDispatch();
     const allGenres = useSelector(state => state.genres);
     let allVideogames = useSelector(state => state.allVideogames);
-    let plataforma = (allVideogames.map((e) => e.platforms))
-    let allPlatf = [...new Set(plataforma.flat())].sort();
+    let platform = (allVideogames.map((e) => e.platforms))
+    let allPlatf = [...new Set(platform.flat())].sort();
     if(allPlatf.length > 19){
         allPlatf.pop()
     }
@@ -160,6 +160,13 @@ export default function Form(){
                 platforms: filt
             }))
         }
+    }
+
+    function handleDelete(c) {
+        setInput({
+            ...input,
+            genres: input.genres.filter(f => f !== c)
+        })
     }
 
     return (
@@ -261,20 +268,6 @@ export default function Form(){
                             {errors.genres && <p style={{ color: "red" }}>{errors.genres}</p>}
                         </div>
                     </div>
-                    <div>
-                        <input
-                            className="submit"
-                            type="submit"
-                            value={input.created}
-                            disabled={Object.keys(errors).length > 0 ||
-                                input.name === "" ||
-                                input.description === "" ||
-                                input.released === "" ||
-                                input.rating === "" ||
-                                input.genres.length === 0 ||
-                                input.platforms.length === 0}
-                            />
-                    </div>
                     <div className="platform">
                         <div>
                             <label className="title">Platforms: </label>
@@ -299,6 +292,54 @@ export default function Form(){
                             })}
                             {errors.platforms && <p style={{ color: "red" }}>{errors.platforms}</p>}
                         </div>
+                    </div>
+                    <div>
+                        <input
+                            className="submit"
+                            type="submit"
+                            value={input.created}
+                            disabled={Object.keys(errors).length > 0 ||
+                                input.name === "" ||
+                                input.description === "" ||
+                                input.released === "" ||
+                                input.rating === "" ||
+                                input.genres.length === 0 ||
+                                input.platforms.length === 0}
+                        />
+                    </div>
+                    <div className="creation">
+                        {/* ------------------------------------------------------------ */}
+                        {
+                            input.name ? <div>Name: {input.name}</div> : <></>
+                        }
+                        {
+                            input.description ? <p>Description: {input.description}</p> : <></>
+                        }
+                        {
+                            input.image ?
+                                <img src={input.image} alt="videogame" width="150px" height="150px" /> : <></>
+                        }
+                        {
+                            input.released ? <p>Released: {input.released}</p> : <></>
+                        }
+                        {
+                            input.rating ? <p>Rating: {input.rating}</p> : <></>
+                        }
+                        {
+                            input.genres.length ?
+                                <ul><li>Genres: {input.genres.map(g => {
+                                    return <div>
+                                            <label>{g + " ,"}</label>
+                                        <button type='button' onClick={() => handleDelete(g)} >x</button>
+                                    </div>
+                                })}</li></ul> :
+                                <></>
+                        }
+                        {
+                            input.platforms.length ?
+                                <ul><li>Platforms: {input.platforms && input.platforms.map(c => <label>{c + " ,"}</label>)}</li></ul> : <></>
+                        }
+                        {/* ------------------------------------------------------------ */}
                     </div>
                 </div>
             </form>

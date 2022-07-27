@@ -93,3 +93,10 @@ export function postVideogame(game){
         return created;
     }
 }
+
+export function reset_videogames(){
+    return{
+        type: "RESET_VIDEOGAMES",
+        payload:[]
+    }
+}
