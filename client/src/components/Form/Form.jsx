@@ -162,12 +162,12 @@ export default function Form(){
         }
     }
 
-    function handleDelete(c) {
-        setInput({
-            ...input,
-            genres: input.genres.filter(f => f !== c)
-        })
-    }
+    // function handleDelete(c) {
+    //     setInput({
+    //         ...input,
+    //         genres: input.genres.filter(f => f !== c)
+    //     })
+    // }
 
     return (
         <div className="form">
@@ -234,7 +234,7 @@ export default function Form(){
                         <input
                             className="inputext"
                             type="number"
-                            step={0.01}
+                            step={0.1}
                             name="rating"
                             value={input.rating}
                             onChange={e => handleChange(e)}
@@ -297,7 +297,8 @@ export default function Form(){
                         <input
                             className="submit"
                             type="submit"
-                            value={input.created}
+                            // value={input.created}
+                            value="Create"
                             disabled={Object.keys(errors).length > 0 ||
                                 input.name === "" ||
                                 input.description === "" ||
@@ -307,37 +308,44 @@ export default function Form(){
                                 input.platforms.length === 0}
                         />
                     </div>
-                    <div className="creation">
+                    <div className="creation"><h3>Your videogame:</h3>
                         {/* ------------------------------------------------------------ */}
                         {
-                            input.name ? <div>Name: {input.name}</div> : <></>
+                            input.name ? <div className="sub">Name:   <span>{input.name}</span></div> : <></>
                         }
                         {
-                            input.description ? <p>Description: {input.description}</p> : <></>
+                            input.description ? <div className="sub">Description:   <span>{input.description}</span></div> : <></>
                         }
                         {
                             input.image ?
                                 <img src={input.image} alt="videogame" width="150px" height="150px" /> : <></>
                         }
                         {
-                            input.released ? <p>Released: {input.released}</p> : <></>
+                            input.released ? <div className="sub">Released:   <span>{input.released}</span></div> : <></>
                         }
                         {
-                            input.rating ? <p>Rating: {input.rating}</p> : <></>
+                            input.rating ? <div className="sub">Rating:   <span>{input.rating}</span></div> : <></>
                         }
                         {
                             input.genres.length ?
-                                <ul><li>Genres: {input.genres.map(g => {
-                                    return <div>
-                                            <label>{g + " ,"}</label>
-                                        <button type='button' onClick={() => handleDelete(g)} >x</button>
-                                    </div>
-                                })}</li></ul> :
-                                <></>
+                                <div className="sub">Genres: {input.genres.map(g => {
+                                    return (
+                                        <div>
+                                            <span>{g}</span>
+                                            {/* <button type='button' onClick={() => handleDelete(g)} >x</button> */}
+                                        </div>
+                                    )
+                                })}</div> : <></>
                         }
                         {
                             input.platforms.length ?
-                                <ul><li>Platforms: {input.platforms && input.platforms.map(c => <label>{c + " ,"}</label>)}</li></ul> : <></>
+                                <div className="sub">Platforms: {input.platforms.map(c => {
+                                    return (
+                                        <div>
+                                            <span>{c}</span>
+                                        </div>
+                                    )
+                                })}</div> : <></>
                         }
                         {/* ------------------------------------------------------------ */}
                     </div>

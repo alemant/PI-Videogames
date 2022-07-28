@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from './Card/Card';
 import './Cards.css';
-import image from '../../../images/Loadin.gif';
-
+import Charging from './../../Charging.jsx';
 
 export default function Cards({allVideogames}){
     //console.log(allVideogames);
@@ -19,7 +18,7 @@ export default function Cards({allVideogames}){
                 />
             )):
             <div className="container">
-                <img src={image} alt="Img" width="497px" height="497px"/>
+                <Charging />
             </div>
             }
         </div>
